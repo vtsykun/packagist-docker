@@ -1,0 +1,17 @@
+#!/bin/bash
+
+START=`date +%s`
+
+if [ -f app/console ]; then
+    php app/fast_console "$@"
+elif [ -f bin/console ]; then
+    php bin/console "$@"
+else
+    echo "Not found symfony project"
+    exit 1
+fi
+
+END=`date +%s`
+SECONDS=$(($END-$START))
+
+echo "Execution time - $(($SECONDS/60)) minutes $(($SECONDS%60)) seconds"
