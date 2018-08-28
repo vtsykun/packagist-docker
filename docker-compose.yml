@@ -3,6 +3,7 @@ version: '2'
 services:
     postgres:
         hostname: postgres
+        container_name: postgres_packagist
         image: postgres:9.6
         volumes:
             - .docker/db:/var/lib/postgresql/data
@@ -12,11 +13,14 @@ services:
         expose:
           - "5432"
     packagist:
+        build: .
         image: okvpn/packagist:1.0
-        container_name: private-packagist
-        hostname: pkg
+        container_name: app_packagist
+        hostname: packagist
         volumes:
+          - .docker/data:/var/tmp/data
           - .docker/redis:/var/lib/redis
+          - .docker/zipball:/var/www/paclagist/app/zipball
           - .docker/tmp/www-composer:/var/www/.composer
           - .ssh:/var/tmp/ssh
         links:
