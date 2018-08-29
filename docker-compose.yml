@@ -20,7 +20,7 @@ services:
         volumes:
           - .docker/data:/var/tmp/data
           - .docker/redis:/var/lib/redis
-          - .docker/zipball:/var/www/paclagist/app/zipball
+          - .docker/zipball:/var/www/packagist/app/zipball
           - .docker/tmp/www-composer:/var/www/.composer
           - .ssh:/var/tmp/ssh
         links:
