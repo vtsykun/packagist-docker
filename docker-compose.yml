@@ -8,31 +8,38 @@ services:
         volumes:
             - .docker/db:/var/lib/postgresql/data
         environment:
-            POSTGRES_DB: ${DATABASE_NAME}
-            POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+            POSTGRES_DB: packagist
+            POSTGRES_PASSWORD: 123456
         expose:
-          - "5432"
+            - "5432"
     packagist:
-        build: .
-        image: okvpn/packagist:1.0
-        container_name: app_packagist
+        build:
+            context: .
+            args:
+                VERSION: master
+                CACHEBUST: ~
+        image: okvpn/packagist:lasted
+        container_name: packagist
         hostname: packagist
         volumes:
-          - .docker/data:/var/tmp/data
-          - .docker/redis:/var/lib/redis
-          - .docker/zipball:/var/www/packagist/app/zipball
-          - .docker/tmp/www-composer:/var/www/.composer
-          - .ssh:/var/tmp/ssh
+            - .docker/data:/var/tmp/data
+            - .docker/redis:/var/lib/redis
+            - .docker/zipball:/var/www/packagist/app/zipball
+            - .docker/composer:/var/www/.composer
+            - .docker/ssh:/var/www/.ssh
         links:
-          - "postgres"
+            - "postgres"
         environment:
-          PRIVATE_REPO_DOMAIN_LIST: bitbucket.org gitlab.com github.com
-          VIRTUAL_HOST: ${APP_HOST}
-          DATABASE_HOST: ${DATABASE_HOST}
-          DATABASE_PORT: ${DATABASE_PORT}
-          DATABASE_DRIVER: ${DATABASE_DRIVER}
-          DATABASE_USER: ${DATABASE_USER}
-          DATABASE_NAME: ${DATABASE_NAME}
-          DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+            PRIVATE_REPO_DOMAIN_LIST: bitbucket.org gitlab.com github.com
+            VIRTUAL_HOST: packagist.mycompany.org
+            DATABASE_HOST: postgres
+            DATABASE_PORT: 5432
+            DATABASE_DRIVER: pdo_pgsql
+            DATABASE_USER: postgres
+            DATABASE_NAME: packagist
+            DATABASE_PASSWORD: 123456
+            ADMIN_USER: admin
+            ADMIN_PASSWORD: admin
+            ADMIN_EMAIL: admin@example.com
         ports:
-          - 127.0.0.1:8088:80
+          - 8088:80
