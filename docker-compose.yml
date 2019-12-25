@@ -17,7 +17,6 @@ services:
             context: .
             args:
                 VERSION: master
-                CACHEBUST: ~
         image: okvpn/packagist:lasted
         container_name: packagist
         hostname: packagist
@@ -31,12 +30,13 @@ services:
             - "postgres"
         environment:
             PRIVATE_REPO_DOMAIN_LIST: bitbucket.org gitlab.com github.com
-            VIRTUAL_HOST: packagist.mycompany.org
-            DATABASE_HOST: postgres
+            PACKAGIST_DIST_HOST: https://pkg.okvpn.org
+            PACKAGIST_HOST: pkg.okvpn.org
             DATABASE_PORT: 5432
             DATABASE_DRIVER: pdo_pgsql
             DATABASE_USER: postgres
             DATABASE_NAME: packagist
+            DATABASE_HOST: postgres
             DATABASE_PASSWORD: 123456
             ADMIN_USER: admin
             ADMIN_PASSWORD: admin
