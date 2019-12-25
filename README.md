@@ -58,7 +58,7 @@ services:
         expose:
             - "5432"
     packagist:
-        image: okvpn/packagist:latest
+        image: okvpn/packeton:latest
         container_name: packagist
         hostname: packagist
         volumes:
