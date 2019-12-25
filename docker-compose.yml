@@ -3,7 +3,7 @@ version: '2'
 services:
     postgres:
         hostname: postgres
-        container_name: postgres_packagist
+        container_name: pgsql-pkg
         image: postgres:9.6
         volumes:
             - .docker/db:/var/lib/postgresql/data
@@ -12,12 +12,13 @@ services:
             POSTGRES_PASSWORD: 123456
         expose:
             - "5432"
+
     packagist:
         build:
             context: .
             args:
                 VERSION: master
-        image: okvpn/packagist:lasted
+        image: okvpn/packagist:latest
         container_name: packagist
         hostname: packagist
         volumes:
@@ -31,14 +32,15 @@ services:
         environment:
             PRIVATE_REPO_DOMAIN_LIST: bitbucket.org gitlab.com github.com
             PACKAGIST_DIST_HOST: https://pkg.okvpn.org
+            DATABASE_HOST: postgres
             DATABASE_PORT: 5432
             DATABASE_DRIVER: pdo_pgsql
             DATABASE_USER: postgres
             DATABASE_NAME: packagist
-            DATABASE_HOST: postgres
             DATABASE_PASSWORD: 123456
             ADMIN_USER: admin
-            ADMIN_PASSWORD: admin
+            ADMIN_PASSWORD: composer
             ADMIN_EMAIL: admin@example.com
+            GITHUB_NO_API: 'true'
         ports:
-          - 8088:80
+            - 127.0.0.1:8088:80
