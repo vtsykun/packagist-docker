@@ -28,7 +28,6 @@ $processor->processFile([
         'trusted_proxies' => 'TRUSTED_PROXIES',
         'trusted_hosts' => 'TRUSTED_HOSTS',
         'packagist_dist_host' => 'PACKAGIST_DIST_HOST',
-        'packagist_host' => 'PACKAGIST_HOST',
         'github_no_api' => 'GITHUB_NO_API'
     ]
 ]);

@@ -31,7 +31,6 @@ services:
         environment:
             PRIVATE_REPO_DOMAIN_LIST: bitbucket.org gitlab.com github.com
             PACKAGIST_DIST_HOST: https://pkg.okvpn.org
-            PACKAGIST_HOST: pkg.okvpn.org
             DATABASE_PORT: 5432
             DATABASE_DRIVER: pdo_pgsql
             DATABASE_USER: postgres
