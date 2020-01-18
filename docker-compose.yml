@@ -22,7 +22,6 @@ services:
         container_name: packagist
         hostname: packagist
         volumes:
-            - .docker/data:/var/tmp/data
             - .docker/redis:/var/lib/redis
             - .docker/zipball:/var/www/packagist/app/zipball
             - .docker/composer:/var/www/.composer

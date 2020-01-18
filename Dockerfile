@@ -57,14 +57,13 @@ COPY php/php.ini /usr/local/etc/php/conf.d/90-php.ini
 COPY supervisor/* /etc/supervisor/conf.d/
 COPY php/supervisord.conf /etc/supervisor
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY php/cron.conf /tmp/cron.conf
 COPY php/env-map.php /var/www/packagist/
 COPY php/app.php /var/www/packagist/web/
 COPY php/app /usr/local/bin/app
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 RUN set -eux; \
-    crontab -u www-data /tmp/cron.conf; mkdir -p /run/php/; \
+    mkdir -p /run/php/; \
     chmod +x /usr/local/bin/app /usr/local/bin/docker-entrypoint.sh; \
     usermod -d /var/www www-data
 
