@@ -28,6 +28,7 @@ $processor->processFile([
         'trusted_proxies' => 'TRUSTED_PROXIES',
         'trusted_hosts' => 'TRUSTED_HOSTS',
         'packagist_dist_host' => 'PACKAGIST_DIST_HOST',
-        'github_no_api' => 'GITHUB_NO_API'
+        'github_no_api' => 'GITHUB_NO_API',
+        'package_update_interval' => 'PACKAGE_UPDATE_INTERVAL',
     ]
 ]);
