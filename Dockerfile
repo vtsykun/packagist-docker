@@ -28,7 +28,7 @@ RUN set -eux; \
 	\
 	pecl install -o -f redis apcu; \
 	docker-php-ext-enable redis apcu; \
-    docker-php-ext-install xsl zip pdo pdo_pgsql intl sysvsem opcache \
+    docker-php-ext-install xsl zip pdo pdo_pgsql pdo_mysql intl sysvsem opcache \
         bz2 xmlrpc mbstring iconv curl pcntl; \
     runDeps="$( \
 		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
