@@ -65,7 +65,8 @@ COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN set -eux; \
     mkdir -p /run/php/; \
     chmod +x /usr/local/bin/app /usr/local/bin/docker-entrypoint.sh; \
-    usermod -d /var/www www-data
+    usermod -d /var/www www-data; \
+    chown www-data:www-data /var/lib/nginx /var/lib/nginx/tmp
 
 WORKDIR /var/www/packagist
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
