@@ -49,6 +49,7 @@ RUN set -eux; \
     rm -rf /var/www/packagist/.git; \
     composer global require hirak/prestissimo; \
     composer install --no-interaction --no-suggest --no-dev --prefer-dist --working-dir /var/www/packagist; \
+    sed -i "s/assets_version"\:".*/assets_version"\:" $(head /dev/urandom | tr -dc a-f0-9 | head -c 8)/g" /var/www/packagist/app/config/defaults.yml; \
     chown www-data:www-data -R /var/www; \
     rm -rf /root/.composer
 
