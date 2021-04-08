@@ -29,16 +29,16 @@ DB_DRIVER=$(cat 'app/config/parameters.yml' | awk '/database_driver:/{ print $2 
 
 rm -rf var/cache/*
 app cache:clear --env=prod && app cache:clear --env=dev
-app doctrine:schema:update --force -v
+app doctrine:schema:update --force --env=prod -v
 
 case "$DB_DRIVER" in
     pdo_pgsql)
-        app doctrine:query:sql "CREATE EXTENSION IF NOT EXISTS fuzzystrmatch" -vvv
+        app doctrine:query:sql "CREATE EXTENSION IF NOT EXISTS fuzzystrmatch" --env=prod -vvv
     ;;
 esac
 
 if [[ -n ${ADMIN_USER} ]]; then
-  app packagist:user:manager "$ADMIN_USER" --email="$ADMIN_EMAIL" --password="$ADMIN_PASSWORD" --admin
+  app packagist:user:manager "$ADMIN_USER" --email="$ADMIN_EMAIL" --password="$ADMIN_PASSWORD" --admin --env=prod
 fi
 
 chown www-data:www-data -R /var/www/
