@@ -1,8 +1,13 @@
-## Packeton Docker image.
+## DEPRECATED
+
+The source code has been moved to the main repository.
+Use a new [packeton/packeton](https://hub.docker.com/r/packeton/packeton) image 
+
+### Packeton Docker image for v1 version (DEPRECATED).
 
 Docker image for private packagist [packeton](https://github.com/vtsykun/packeton).
 
-## Usage
+### Usage
 
 To boot in standalone mode
 
